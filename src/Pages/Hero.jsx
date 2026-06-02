@@ -50,7 +50,7 @@ function Hero() {
       <div className="flex-1 flex justify-center mt-10 md:mt-0">
         <div className="p-2 rounded-full shadow-[0_0_60px_20px_rgba(80,199,248,8)]">
           <img
-            src="DeepakPhoto.jpg"
+            src="image.png"
             alt="profile"
             className="w-56 h-56 md:h-80 object-cover md:w-80 rounded-full border border-purple-600 hover:scale-105 duration-300"
           />
