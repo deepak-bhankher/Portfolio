@@ -38,7 +38,7 @@ function Hero() {
           >
             Learn More About Me ↓
           </button>
-          <a href="/Deepak_CV.pdf" download>
+          <a href="/Final_Resume.pdf" download="Final_Resume.pdf">
             <button className="px-4 py-2 bg-white cursor-pointer text-black rounded hover:scale-105 transition-all">
               Download CV 📄
             </button>
