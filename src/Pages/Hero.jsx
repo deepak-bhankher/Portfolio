@@ -40,13 +40,13 @@ function Hero() {
                 behavior: "smooth",
               });
             }}
-            className="px-5 py-3 border border-purple-500 rounded-lg text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-orange-400 transition-all duration-300"
+            className="px-5 py-3 border cursor-pointer border-purple-500 rounded-lg text-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-orange-400 transition-all duration-300"
           >
             Learn More About Me ↓
           </button>
 
           <a href="/Final_Resume.pdf" download>
-            <button className="px-5 py-3 bg-white text-black rounded-lg hover:scale-105 transition-all duration-300">
+            <button className="px-5 py-3 bg-white cursor-pointer text-black rounded-lg hover:scale-105 transition-all duration-300">
               Download CV 📄
             </button>
           </a>
