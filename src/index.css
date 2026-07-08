@@ -4,14 +4,21 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  background: radial-gradient(circle at 50% 30%,  #9a272f 0%, transparent 35%),
+    linear-gradient(135deg, #2A0608 0%, #45080C 45%, #6E0E15 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
 .shimmer-text {
   background: linear-gradient(
     90deg,
-    #a855f7 0%,
-    #ec4899 25%,
+    #D98D95 0%,
+    #F5C6CB 25%,
     #ffffff 50%,
-    #ec4899 75%,
-    #a855f7 100%
+    #F5C6CB 75%,
+    #D98D95 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
