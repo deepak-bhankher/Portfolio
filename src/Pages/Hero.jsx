@@ -135,7 +135,7 @@ function Hero() {
               Learn More About Me ↓
             </motion.button>
 
-            <a href="/Final_Resume.pdf" download>
+            <a href="/Deepak_Resume.pdf" download>
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.96 }}
