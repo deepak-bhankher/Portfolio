@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { RxCross1 } from "react-icons/rx";
 import { CiMenuFries } from "react-icons/ci";
+import { Download } from "lucide-react";
+import MagneticButton from "../Components/MagneticButton";
 
 const NAV_ITEMS = [
   "Home",
@@ -19,7 +21,7 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(0);
 
-  // Gold scroll-progress bar under the navbar
+  // Cyan-violet scroll-progress bar under the navbar
   const { scrollYProgress } = useScroll();
   const progressWidth = useSpring(scrollYProgress, {
     stiffness: 120,
@@ -33,24 +35,23 @@ export default function Navbar() {
 
       setScrolled(currentY > 24);
 
-      // Hide on scroll down, reveal on scroll up (ignore tiny jitter + top of page)
       if (currentY < 80) {
         setHidden(false);
       } else if (currentY > lastScrollY.current + 4) {
         setHidden(true);
-        setOpen(false); // close mobile menu if user scrolls away
+        setOpen(false);
       } else if (currentY < lastScrollY.current - 4) {
         setHidden(false);
       }
       lastScrollY.current = currentY;
 
       const sections = NAV_ITEMS.map((item) =>
-        document.getElementById(item === "Home" ? "Hero" : item.toLowerCase()),
+        document.getElementById(item === "Home" ? "Hero" : item.toLowerCase())
       );
       sections.forEach((sec) => {
         if (sec) {
           const rect = sec.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) setActive(sec.id);
+          if (rect.top <= 120 && rect.bottom >= 120) setActive(sec.id);
         }
       });
     };
@@ -74,53 +75,52 @@ export default function Navbar() {
       >
         <div
           className={`relative max-w-5xl mx-auto rounded-2xl px-5 overflow-hidden
-            bg-[#2A0608]/70 backdrop-blur-xl
+            bg-[#0B0F17]/80 backdrop-blur-xl
             transition-all duration-500 ${
               scrolled
-                ? "border border-[#D98D95]/35 shadow-[0_8px_32px_rgba(217,141,149,0.25)]"
-                : "border border-[#D98D95]/15 shadow-[0_4px_20px_rgba(0,0,0,0.35)]"
+                ? "border border-cyan-500/30 shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_20px_rgba(56,189,248,0.15)]"
+                : "border border-slate-800/80 shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
             }`}
         >
-          <div className="flex items-center justify-between h-[62px]">
+          <div className="flex items-center justify-between h-[64px]">
             {/* Logo */}
-            <motion.div
-              whileHover={{ scale: 1.06, rotate: -4 }}
-              whileTap={{ scale: 0.94 }}
-              transition={{ type: "spring", stiffness: 300, damping: 16 }}
-              className="flex items-center gap-2.5 cursor-pointer group"
-            >
-              <span
-                className="relative w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm text-[#2A0608]"
-                style={{
-                  background: "linear-gradient(135deg, #F5C6CB, #D98D95)",
-                  boxShadow: "0 0 16px rgba(217,141,149,0.5)",
-                }}
+            <a href="#Hero">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 300, damping: 16 }}
+                className="flex items-center gap-2.5 cursor-pointer group"
               >
-                D
-                <motion.span
-                  className="absolute inset-0 rounded-full"
+                <span
+                  className="relative w-8 h-8 rounded-lg flex items-center justify-center font-extrabold text-sm text-slate-950"
                   style={{
-                    boxShadow: "0 0 0 0 rgba(245,198,203,0.6)",
+                    background: "linear-gradient(135deg, #38BDF8, #818CF8)",
+                    boxShadow: "0 0 16px rgba(56,189,248,0.5)",
                   }}
-                  animate={{
-                    boxShadow: [
-                      "0 0 0 0 rgba(245,198,203,0.45)",
-                      "0 0 0 6px rgba(245,198,203,0)",
-                    ],
-                  }}
-                  transition={{
-                    duration: 1.8,
-                    repeat: Infinity,
-                    ease: "easeOut",
-                  }}
-                />
-              </span>
-              <span className="font-bold text-[17px] tracking-tight shimmer-text">
-                Deepak
-              </span>
-            </motion.div>
+                >
+                  D
+                  <motion.span
+                    className="absolute inset-0 rounded-lg"
+                    animate={{
+                      boxShadow: [
+                        "0 0 0 0 rgba(56,189,248,0.5)",
+                        "0 0 0 6px rgba(56,189,248,0)",
+                      ],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeOut",
+                    }}
+                  />
+                </span>
+                <span className="font-bold text-[18px] tracking-tight shimmer-text">
+                  Deepak
+                </span>
+              </motion.div>
+            </a>
 
-            {/* Desktop Links - centered absolute */}
+            {/* Desktop Links */}
             <ul className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2 list-none m-0 p-0">
               {NAV_ITEMS.map((item, i) => {
                 const id = item === "Home" ? "Hero" : item.toLowerCase();
@@ -130,20 +130,20 @@ export default function Navbar() {
                     key={item}
                     initial={{ opacity: 0, y: -8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.08 + i * 0.06, duration: 0.35 }}
+                    transition={{ delay: 0.08 + i * 0.05, duration: 0.35 }}
                     className="relative list-none"
                   >
                     <motion.a
                       href={`#${id}`}
                       whileHover={{ y: -1 }}
                       whileTap={{ scale: 0.96 }}
-                      className={`relative px-3 py-2 text-sm font-medium tracking-wide transition-colors duration-300 block rounded-lg
-                        ${isActive ? "text-[#F5C6CB]" : "text-white/55 hover:text-[#F5C6CB]"}`}
+                      className={`relative px-3.5 py-2 text-sm font-medium tracking-wide transition-colors duration-300 block rounded-xl
+                        ${isActive ? "text-cyan-300" : "text-slate-400 hover:text-cyan-200"}`}
                     >
                       {isActive && (
                         <motion.span
-                          layoutId="pill"
-                          className="absolute inset-0 rounded-lg bg-black/40 border border-white/10 overflow-hidden"
+                          layoutId="nav-pill"
+                          className="absolute inset-0 rounded-xl bg-cyan-500/10 border border-cyan-400/30 shadow-[0_0_12px_rgba(56,189,248,0.2)] overflow-hidden"
                           transition={{
                             type: "spring",
                             stiffness: 420,
@@ -154,19 +154,19 @@ export default function Navbar() {
                             className="absolute inset-y-0 w-1/3"
                             style={{
                               background:
-                                "linear-gradient(90deg, transparent, rgba(245,198,203,0.25), transparent)",
+                                "linear-gradient(90deg, transparent, rgba(56,189,248,0.3), transparent)",
                             }}
                             animate={{ x: ["-40%", "160%"] }}
                             transition={{
                               duration: 2.2,
                               repeat: Infinity,
                               ease: "linear",
-                              repeatDelay: 1.2,
+                              repeatDelay: 1,
                             }}
                           />
                         </motion.span>
                       )}
-                      <span className="relative">{item}</span>
+                      <span className="relative z-10">{item}</span>
                     </motion.a>
                   </motion.li>
                 );
@@ -180,30 +180,34 @@ export default function Navbar() {
               transition={{ duration: 0.45, delay: 0.2 }}
               className="hidden md:block"
             >
-              <a href="/Final_Resume.pdf" download>
-                <motion.button
-                  whileHover={{ scale: 1.04, y: -1 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer
-                    text-[#2A0608] border border-black/10
-                    bg-gradient-to-r from-[#F5C6CB] via-[#F0A0A8] to-[#D98D95]
-                    hover:shadow-[0_0_22px_rgba(217,141,149,0.5)]
-                    transition-shadow duration-300"
-                >
-                  Download CV 📄
-                </motion.button>
-              </a>
+              <MagneticButton>
+                <a href="/Final_Resume.pdf" download>
+                  <motion.button
+                    whileHover={{ scale: 1.04, y: -1 }}
+                    whileTap={{ scale: 0.96 }}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider cursor-pointer
+                      text-slate-950 border border-cyan-400/30
+                      bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-500
+                      shadow-[0_0_18px_rgba(56,189,248,0.4)]
+                      hover:shadow-[0_0_26px_rgba(56,189,248,0.7)]
+                      transition-shadow duration-300"
+                  >
+                    <Download size={14} />
+                    <span>Resume</span>
+                  </motion.button>
+                </a>
+              </MagneticButton>
             </motion.div>
 
-            {/* Hamburger */}
+            {/* Mobile Hamburger */}
             <motion.button
-              whileTap={{ scale: 0.87 }}
+              whileTap={{ scale: 0.88 }}
               onClick={() => setOpen(!open)}
-              className="md:hidden cursor-pointer border border-black/10
-                p-2 rounded-xl text-[#2A0608]
-                bg-gradient-to-r from-[#F5C6CB] via-[#F0A0A8] to-[#D98D95]
-                shadow-[0_0_14px_rgba(217,141,149,0.4)]
-                transition-all duration-300"
+              aria-label="Toggle menu"
+              className="md:hidden cursor-pointer border border-cyan-500/30
+                p-2.5 rounded-xl text-cyan-300
+                bg-slate-900/80 shadow-[0_0_12px_rgba(56,189,248,0.2)]
+                hover:border-cyan-400 transition-all duration-300"
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
@@ -226,7 +230,7 @@ export default function Navbar() {
             style={{
               scaleX: progressWidth,
               width: "100%",
-              background: "linear-gradient(90deg, #F5C6CB, #D98D95)",
+              background: "linear-gradient(90deg, #38BDF8, #818CF8)",
             }}
           />
         </div>
@@ -241,12 +245,12 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={() => setOpen(false)}
-            className="fixed inset-0 z-30 bg-black/50 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-30 bg-black/60 backdrop-blur-md md:hidden"
           />
         )}
       </AnimatePresence>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -254,12 +258,12 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.97 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed top-[82px] left-4 right-4 z-40 md:hidden"
+            className="fixed top-[84px] left-4 right-4 z-40 md:hidden"
           >
             <div
-              className="bg-[#2A0608]/90 backdrop-blur-xl rounded-2xl
-              border border-[#D98D95]/25
-              shadow-[0_20px_60px_rgba(0,0,0,0.4),0_0_0_1px_rgba(217,141,149,0.12)]
+              className="bg-[#0B0F17]/95 backdrop-blur-2xl rounded-2xl
+              border border-cyan-500/30
+              shadow-[0_20px_60px_rgba(0,0,0,0.6),0_0_30px_rgba(56,189,248,0.15)]
               overflow-hidden"
             >
               <ul className="flex flex-col list-none px-3 py-3 gap-1">
@@ -280,12 +284,17 @@ export default function Navbar() {
                         whileTap={{ scale: 0.97 }}
                         className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl
                           text-sm font-medium transition-all duration-200
-                          ${isActive ? "text-[#F5C6CB] bg-black/30" : "text-white/70 hover:bg-black/20 hover:text-[#F5C6CB]"}`}
+                          ${
+                            isActive
+                              ? "text-cyan-300 bg-cyan-500/15 border border-cyan-500/30"
+                              : "text-slate-300 hover:bg-slate-800/50 hover:text-cyan-200"
+                          }`}
                       >
                         <span
-                          className="w-1.5 h-1.5 rounded-full shrink-0"
+                          className="w-2 h-2 rounded-full shrink-0"
                           style={{
-                            background: isActive ? "#F5C6CB" : "#D98D95",
+                            background: isActive ? "#38BDF8" : "#64748B",
+                            boxShadow: isActive ? "0 0 8px #38BDF8" : "none",
                           }}
                         />
                         {item}
@@ -298,7 +307,7 @@ export default function Navbar() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.22 }}
-                  className="list-none mt-1 pt-3 border-t border-white/10"
+                  className="list-none mt-1 pt-3 border-t border-slate-800"
                 >
                   <a
                     href="/Final_Resume.pdf"
@@ -309,12 +318,12 @@ export default function Navbar() {
                       whileTap={{ scale: 0.97 }}
                       className="w-full flex justify-center items-center gap-2
                       py-3 px-6 rounded-xl cursor-pointer
-                      text-sm font-semibold text-[#2A0608] border border-black/10
-                      bg-gradient-to-r from-[#F5C6CB] via-[#F0A0A8] to-[#D98D95]
-                      shadow-[0_0_20px_rgba(217,141,149,0.45)]
+                      text-sm font-bold text-slate-950
+                      bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-500
+                      shadow-[0_0_20px_rgba(56,189,248,0.45)]
                       transition-shadow duration-300"
                     >
-                      Download CV 📄
+                      <Download size={16} /> Download CV
                     </motion.button>
                   </a>
                 </motion.li>
