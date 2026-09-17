@@ -73,7 +73,7 @@ export default function TiltCard({
           transition: transform.scale === 1 ? "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)" : "transform 0.1s ease-out",
           transformStyle: "preserve-3d",
         }}
-        className="relative w-full h-full rounded-2xl"
+        className={`relative w-full h-full rounded-2xl ${className.includes("cursor-pointer") ? "cursor-pointer" : ""}`}
       >
         {children}
 
