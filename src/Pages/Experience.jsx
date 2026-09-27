@@ -86,8 +86,8 @@ function Experience() {
               viewport={{ once: true, amount: 0.3 }}
               variants={fadeUp}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className="bg-[#0E1526]/85 border border-slate-800/90 backdrop-blur-xl rounded-2xl p-6 sm:p-8
-                hover:border-cyan-500/40 hover:shadow-[0_12px_40px_rgba(56,189,248,0.2)]
+              className="bg-[#0B0F17]/85 border border-white/[0.08] backdrop-blur-2xl rounded-2xl p-6 sm:p-8
+                hover:border-cyan-400/40 hover:shadow-[0_16px_45px_rgba(6,182,212,0.2)]
                 transition-all duration-300"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800/80">

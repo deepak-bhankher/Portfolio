@@ -61,7 +61,7 @@ function About() {
             viewport={{ once: true, amount: 0.5 }}
             variants={fadeUp}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-            className="p-6 rounded-2xl bg-[#0E1526]/70 border border-slate-800/80 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
+            className="p-6 sm:p-7 rounded-2xl bg-[#0B0F17]/80 border border-white/[0.08] backdrop-blur-2xl shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
           >
             <p className="text-slate-300 text-lg leading-relaxed">
               I am a results-driven{" "}
@@ -78,7 +78,7 @@ function About() {
             viewport={{ once: true, amount: 0.5 }}
             variants={fadeUp}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-            className="p-6 rounded-2xl bg-[#0E1526]/70 border border-slate-800/80 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
+            className="p-6 sm:p-7 rounded-2xl bg-[#0B0F17]/80 border border-white/[0.08] backdrop-blur-2xl shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
           >
             <p className="text-slate-300 text-lg leading-relaxed">
               My core strengths lie in the{" "}
@@ -96,7 +96,7 @@ function About() {
               return (
                 <div
                   key={i}
-                  className="p-3.5 rounded-xl bg-slate-900/60 border border-cyan-500/15 backdrop-blur-md"
+                  className="p-3.5 rounded-xl bg-[#0B0F17]/70 border border-white/[0.06] backdrop-blur-xl hover:border-cyan-500/30 transition-colors"
                 >
                   <div className="flex items-center gap-2 text-cyan-300 font-semibold text-sm mb-1">
                     <Icon size={16} />
@@ -121,9 +121,9 @@ function About() {
                   viewport={{ once: true, amount: 0.4 }}
                   variants={fadeUp}
                   transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.1 }}
-                  className="h-full bg-[#0E1526]/80 border border-slate-800/90 backdrop-blur-xl p-7 rounded-2xl text-center
+                  className="h-full bg-[#0B0F17]/85 border border-white/[0.08] backdrop-blur-2xl p-7 rounded-2xl text-center
                     transition-all duration-300 group
-                    hover:border-cyan-500/40 hover:shadow-[0_10px_35px_rgba(56,189,248,0.2)]"
+                    hover:border-cyan-400/40 hover:shadow-[0_12px_40px_rgba(6,182,212,0.18)]"
                 >
                   <div className="mx-auto mb-4 w-12 h-12 rounded-xl flex items-center justify-center
                     bg-cyan-500/10 border border-cyan-500/20

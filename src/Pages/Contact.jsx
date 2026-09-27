@@ -83,7 +83,7 @@ function Contact() {
             viewport={{ once: true, amount: 0.4 }}
             variants={fadeUp}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="p-6 sm:p-7 rounded-2xl bg-[#0E1526]/85 border border-slate-800/90 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.3)] space-y-6"
+            className="p-6 sm:p-7 rounded-2xl bg-[#0B0F17]/85 border border-white/[0.08] backdrop-blur-2xl shadow-[0_10px_30px_rgba(0,0,0,0.3)] space-y-6"
           >
             <div>
               <h3 className="text-xl font-bold text-slate-100 tracking-tight mb-2">
@@ -187,8 +187,8 @@ function Contact() {
               variants={fadeUp}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
               onSubmit={handleSubmit}
-              className="relative bg-[#0E1526]/85 border border-slate-800/90 backdrop-blur-xl rounded-2xl p-6 sm:p-8
-                shadow-[0_12px_40px_rgba(0,0,0,0.4)] space-y-5"
+              className="relative bg-[#0B0F17]/85 border border-white/[0.08] backdrop-blur-2xl rounded-2xl p-6 sm:p-8
+                shadow-[0_16px_45px_rgba(0,0,0,0.5)] space-y-5"
             >
               <h3 className="text-xl font-bold text-slate-100 tracking-tight mb-2">
                 Send a Message

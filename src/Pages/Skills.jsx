@@ -107,9 +107,9 @@ function Skills() {
                 viewport={{ once: true, amount: 0.3 }}
                 variants={fadeUp}
                 transition={{ duration: 0.45, ease: "easeOut", delay: (index % 3) * 0.08 }}
-                className="h-full bg-[#0E1526]/80 border border-slate-800/90 backdrop-blur-xl rounded-2xl p-6
+                className="h-full bg-[#0B0F17]/85 border border-white/[0.08] backdrop-blur-2xl rounded-2xl p-6
                   transition-all duration-300 group
-                  hover:border-cyan-500/40 hover:shadow-[0_10px_35px_rgba(56,189,248,0.18)] flex flex-col justify-between"
+                  hover:border-cyan-400/40 hover:shadow-[0_12px_40px_rgba(6,182,212,0.18)] flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">

@@ -75,11 +75,11 @@ export default function Navbar() {
       >
         <div
           className={`relative max-w-5xl mx-auto rounded-2xl px-5 overflow-hidden
-            bg-[#0B0F17]/80 backdrop-blur-xl
+            bg-[#0B0F17]/85 backdrop-blur-2xl
             transition-all duration-500 ${
               scrolled
-                ? "border border-cyan-500/30 shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_20px_rgba(56,189,248,0.15)]"
-                : "border border-slate-800/80 shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
+                ? "border border-cyan-500/35 shadow-[0_12px_36px_rgba(0,0,0,0.6),0_0_24px_rgba(6,182,212,0.18)]"
+                : "border border-white/[0.08] shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
             }`}
         >
           <div className="flex items-center justify-between h-[64px]">
@@ -181,7 +181,7 @@ export default function Navbar() {
               className="hidden md:block"
             >
               <MagneticButton>
-                <a href="/Final_Resume.pdf" download>
+                <a href="/Resume.pdf" download>
                   <motion.button
                     whileHover={{ scale: 1.04, y: -1 }}
                     whileTap={{ scale: 0.96 }}
@@ -310,7 +310,7 @@ export default function Navbar() {
                   className="list-none mt-1 pt-3 border-t border-slate-800"
                 >
                   <a
-                    href="/Final_Resume.pdf"
+                    href="/Resume.pdf"
                     download
                     onClick={() => setOpen(false)}
                   >

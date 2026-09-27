@@ -186,8 +186,8 @@ function Projects() {
               onKeyDown={(e) => {
                 if (e.key === "Enter") handleCardClick(item.demo);
               }}
-              className="h-full group bg-[#0E1526]/90 border border-slate-800/90 backdrop-blur-xl rounded-2xl overflow-hidden
-                hover:border-cyan-400/50 hover:shadow-[0_16px_45px_rgba(56,189,248,0.25)]
+              className="h-full group bg-[#0B0F17]/85 border border-white/[0.08] backdrop-blur-2xl rounded-2xl overflow-hidden
+                hover:border-cyan-400/50 hover:shadow-[0_20px_50px_rgba(6,182,212,0.22)]
                 cursor-pointer transition-all duration-300 flex flex-col justify-between"
             >
               <div>
