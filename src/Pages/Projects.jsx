@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Sparkles, Layers, ShoppingBag, Utensils } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
-import TiltCard from "../Components/TiltCard";
 
 const CATEGORIES = [
   { id: "all", label: "All Projects", icon: Sparkles },
@@ -165,139 +164,135 @@ function Projects() {
         })}
       </div>
 
-      {/* 3D Projects Grid */}
+      {/* Projects Grid */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredProjects.map((item, index) => (
-          <TiltCard
+          <motion.div
             key={item.name}
-            maxTilt={12}
-            scale={1.02}
-            className="cursor-pointer"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            variants={fadeUp}
+            transition={{ duration: 0.45, ease: "easeOut", delay: (index % 3) * 0.08 }}
+            whileHover={{ y: -6 }}
+            onClick={() => handleCardClick(item.demo)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleCardClick(item.demo);
+            }}
+            className="h-full group bg-[#0B0F17]/85 border border-white/[0.08] backdrop-blur-2xl rounded-2xl overflow-hidden
+              hover:border-cyan-400/50 hover:shadow-[0_20px_50px_rgba(6,182,212,0.22)]
+              cursor-pointer transition-all duration-300 flex flex-col justify-between"
           >
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeUp}
-              transition={{ duration: 0.45, ease: "easeOut", delay: (index % 3) * 0.08 }}
-              onClick={() => handleCardClick(item.demo)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") handleCardClick(item.demo);
-              }}
-              className="h-full group bg-[#0B0F17]/85 border border-white/[0.08] backdrop-blur-2xl rounded-2xl overflow-hidden
-                hover:border-cyan-400/50 hover:shadow-[0_20px_50px_rgba(6,182,212,0.22)]
-                cursor-pointer transition-all duration-300 flex flex-col justify-between"
-            >
-              <div>
-                {/* Browser-style Header */}
-                <div className="relative">
-                  <div className="flex items-center justify-between px-4 py-2.5 bg-slate-950/90 border-b border-slate-800/80">
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
-                    </div>
-                    <span className="text-[11px] font-mono text-cyan-400/70 tracking-wider">
-                      {item.name.toLowerCase().replace(/\s+/g, "-")}.vercel.app
+            <div>
+              {/* Browser-style Header */}
+              <div className="relative">
+                <div className="flex items-center justify-between px-4 py-2.5 bg-slate-950/90 border-b border-slate-800/80">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
+                  </div>
+                  <span className="text-[11px] font-mono text-cyan-400/70 tracking-wider">
+                    {item.name.toLowerCase().replace(/\s+/g, "-")}.vercel.app
+                  </span>
+                </div>
+
+                {/* Thumbnail Banner with local clean image */}
+                <div className="relative h-52 sm:h-48 overflow-hidden bg-slate-900">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  />
+
+                  {/* Gradient shading */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E1526] via-transparent to-transparent opacity-80" />
+
+                  {/* Top-left Featured Badge */}
+                  {item.featured && (
+                    <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-cyan-400 text-slate-950 shadow-[0_0_15px_rgba(56,189,248,0.7)]">
+                      Featured
+                    </span>
+                  )}
+
+                  {/* Top-right Live indicator pill */}
+                  <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-cyan-500/40 text-cyan-300 text-[11px] font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>Live Demo</span>
+                  </div>
+
+                  {/* Hover launch overlay */}
+                  <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-slate-950/50 backdrop-blur-xs">
+                    <span className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider
+                      text-slate-950 bg-gradient-to-r from-cyan-400 to-indigo-400 shadow-[0_0_25px_rgba(56,189,248,0.8)]">
+                      Open Project <ExternalLink size={14} />
                     </span>
                   </div>
-
-                  {/* Thumbnail Banner with local clean image */}
-                  <div className="relative h-52 sm:h-48 overflow-hidden bg-slate-900">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
-                    />
-
-                    {/* Gradient shading */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0E1526] via-transparent to-transparent opacity-80" />
-
-                    {/* Top-left Featured Badge */}
-                    {item.featured && (
-                      <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-cyan-400 text-slate-950 shadow-[0_0_15px_rgba(56,189,248,0.7)]">
-                        Featured
-                      </span>
-                    )}
-
-                    {/* Top-right Live indicator pill */}
-                    <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-cyan-500/40 text-cyan-300 text-[11px] font-semibold">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>Live Demo</span>
-                    </div>
-
-                    {/* Hover launch overlay */}
-                    <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-slate-950/50 backdrop-blur-xs">
-                      <span className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider
-                        text-slate-950 bg-gradient-to-r from-cyan-400 to-indigo-400 shadow-[0_0_25px_rgba(56,189,248,0.8)]">
-                        Open Project <ExternalLink size={14} />
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-5 sm:p-6 space-y-3.5">
-                  <div className="flex items-start justify-between gap-2">
-                    <h3 className="text-xl font-bold text-slate-100 tracking-tight group-hover:text-cyan-300 transition-colors duration-200">
-                      {item.name}
-                    </h3>
-                    <ExternalLink size={18} className="text-cyan-400 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0 mt-0.5" />
-                  </div>
-
-                  <p className="text-slate-400 text-sm leading-relaxed line-clamp-3">
-                    {item.title}
-                  </p>
-
-                  {/* Tech stack tags */}
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    {item.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2.5 py-1 rounded-md text-[11px] font-medium bg-cyan-950/60 text-cyan-300 border border-cyan-500/25"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div
-                className="px-5 pb-5 sm:px-6 sm:pb-6 pt-2 border-t border-slate-800/80 flex items-center justify-between gap-3"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {item.demo && (
-                  <a
-                    href={item.demo}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider
-                      bg-gradient-to-r from-cyan-400 to-indigo-500 text-slate-950 hover:shadow-[0_0_20px_rgba(56,189,248,0.6)] cursor-pointer transition-all duration-300"
-                  >
-                    <span>Launch App</span>
-                    <ExternalLink size={13} />
-                  </a>
-                )}
+              {/* Content */}
+              <div className="p-5 sm:p-6 space-y-3.5">
+                <div className="flex items-start justify-between gap-2">
+                  <h3 className="text-xl font-bold text-slate-100 tracking-tight group-hover:text-cyan-300 transition-colors duration-200">
+                    {item.name}
+                  </h3>
+                  <ExternalLink size={18} className="text-cyan-400 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0 mt-0.5" />
+                </div>
 
-                {item.github && (
-                  <a
-                    href={item.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold
-                      bg-slate-900/90 text-slate-300 border border-slate-700/80 hover:text-white hover:border-slate-500 hover:bg-slate-800 cursor-pointer transition-all duration-300"
-                  >
-                    <FaGithub size={15} />
-                    <span>Source</span>
-                  </a>
-                )}
+                <p className="text-slate-400 text-sm leading-relaxed line-clamp-3">
+                  {item.title}
+                </p>
+
+                {/* Tech stack tags */}
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {item.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-2.5 py-1 rounded-md text-[11px] font-medium bg-cyan-950/60 text-cyan-300 border border-cyan-500/25"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </motion.div>
-          </TiltCard>
+            </div>
+
+            {/* Action Buttons */}
+            <div
+              className="px-5 pb-5 sm:px-6 sm:pb-6 pt-3 border-t border-slate-800/80 flex items-center justify-between gap-3"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {item.demo && (
+                <a
+                  href={item.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider
+                    bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-500 text-slate-950 shadow-[0_0_16px_rgba(56,189,248,0.4)]
+                    hover:shadow-[0_0_24px_rgba(56,189,248,0.7)] hover:scale-[1.02] active:scale-[0.98] cursor-pointer transition-all duration-200"
+                >
+                  <span>Live Demo</span>
+                  <ExternalLink size={14} />
+                </a>
+              )}
+
+              {item.github && (
+                <a
+                  href={item.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold
+                    bg-slate-900/90 text-slate-300 border border-slate-700/80 hover:text-white hover:border-slate-500 hover:bg-slate-800 cursor-pointer transition-all duration-200"
+                >
+                  <FaGithub size={15} />
+                  <span>Code</span>
+                </a>
+              )}
+            </div>
+          </motion.div>
         ))}
       </div>
     </section>

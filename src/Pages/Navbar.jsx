@@ -137,36 +137,21 @@ export default function Navbar() {
                       href={`#${id}`}
                       whileHover={{ y: -1 }}
                       whileTap={{ scale: 0.96 }}
-                      className={`relative px-3.5 py-2 text-sm font-medium tracking-wide transition-colors duration-300 block rounded-xl
-                        ${isActive ? "text-cyan-300" : "text-slate-400 hover:text-cyan-200"}`}
+                      className={`relative px-3.5 py-2.5 text-sm font-medium tracking-wide transition-colors duration-300 block
+                        ${isActive ? "text-cyan-300 font-semibold" : "text-slate-400 hover:text-cyan-200"}`}
                     >
+                      <span className="relative z-10">{item}</span>
                       {isActive && (
                         <motion.span
-                          layoutId="nav-pill"
-                          className="absolute inset-0 rounded-xl bg-cyan-500/10 border border-cyan-400/30 shadow-[0_0_12px_rgba(56,189,248,0.2)] overflow-hidden"
+                          layoutId="nav-underline"
+                          className="absolute bottom-0 left-2 right-2 h-[2.5px] rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-500 shadow-[0_0_12px_rgba(56,189,248,0.9)]"
                           transition={{
                             type: "spring",
-                            stiffness: 420,
-                            damping: 32,
+                            stiffness: 400,
+                            damping: 30,
                           }}
-                        >
-                          <motion.span
-                            className="absolute inset-y-0 w-1/3"
-                            style={{
-                              background:
-                                "linear-gradient(90deg, transparent, rgba(56,189,248,0.3), transparent)",
-                            }}
-                            animate={{ x: ["-40%", "160%"] }}
-                            transition={{
-                              duration: 2.2,
-                              repeat: Infinity,
-                              ease: "linear",
-                              repeatDelay: 1,
-                            }}
-                          />
-                        </motion.span>
+                        />
                       )}
-                      <span className="relative z-10">{item}</span>
                     </motion.a>
                   </motion.li>
                 );
@@ -181,7 +166,7 @@ export default function Navbar() {
               className="hidden md:block"
             >
               <MagneticButton>
-                <a href="/Resume.pdf" download>
+                <a href="/Resume.pdf">
                   <motion.button
                     whileHover={{ scale: 1.04, y: -1 }}
                     whileTap={{ scale: 0.96 }}
@@ -311,7 +296,6 @@ export default function Navbar() {
                 >
                   <a
                     href="/Resume.pdf"
-                    download
                     onClick={() => setOpen(false)}
                   >
                     <motion.button

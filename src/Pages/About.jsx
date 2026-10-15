@@ -5,7 +5,7 @@ import TiltCard from "../Components/TiltCard";
 
 const CARDS = [
   { title: "6+ Months", sub: "Production Experience", icon: Clock, color: "text-cyan-400" },
-  { title: "9+ Web Apps", sub: "Completed & Deployed", icon: FolderGit2, color: "text-indigo-400" },
+  { title: "10+ Websites", sub: "Completed & Deployed", icon: FolderGit2, color: "text-indigo-400" },
   { title: "Hisar, Haryana", sub: "Location (India)", icon: MapPin, color: "text-sky-400" },
   { title: "Open to Work", sub: "Immediate Joiner", icon: Sparkles, color: "text-emerald-400" },
 ];
@@ -13,7 +13,7 @@ const CARDS = [
 const STACK_PILLS = [
   { icon: Code2, label: "Frontend", desc: "React, Next.js, Tailwind CSS, Vite" },
   { icon: Server, label: "Backend", desc: "Node.js, Express.js, REST APIs, JWT" },
-  { icon: Database, label: "Database", desc: "MongoDB, Mongoose, Data Modeling" },
+  { icon: Database, label: "Database", desc: "MongoDB, Mongoose" },
 ];
 
 const fadeUp = {
@@ -66,9 +66,9 @@ function About() {
             <p className="text-slate-300 text-lg leading-relaxed">
               I am a results-driven{" "}
               <span className="font-bold text-cyan-300">
-                Full Stack MERN Developer
+                MERN Stack Developer
               </span>{" "}
-              with 6 months of hands-on industry experience building modern, responsive web applications at <span className="text-indigo-300 font-medium">Kodu</span> in Hisar. I specialize in turning design concepts and system requirements into production-ready web platforms.
+              with 6+ months of hands-on industry experience building modern, responsive web applications at <span className="text-indigo-300 font-medium">Kodu</span> in Hisar. I specialize in turning design concepts and system requirements into production-ready web platforms.
             </p>
           </motion.div>
 

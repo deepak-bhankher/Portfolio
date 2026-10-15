@@ -72,7 +72,7 @@ function Hero() {
             transition={{ duration: 0.6, delay: 0.35 }}
             className="mt-5 text-base sm:text-lg text-slate-300 leading-relaxed max-w-lg mx-auto md:mx-0 font-normal"
           >
-            Full Stack MERN Developer crafting high-performance, scalable web platforms and interactive 3D digital experiences with modern clean code.
+            MERN Stack Developer building responsive UI designs with scalable and high-performance backend systems.
           </motion.p>
 
           <motion.div
@@ -110,7 +110,7 @@ function Hero() {
             </MagneticButton>
 
             <MagneticButton>
-              <a href="/Resume.pdf" download>
+              <a href="/Resume.pdf">
                 <motion.button
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.96 }}
@@ -120,7 +120,7 @@ function Hero() {
                     transition-all duration-300"
                 >
                   <Download size={16} />
-                  <span>Download CV</span>
+                  <span>Resume</span>
                 </motion.button>
               </a>
             </MagneticButton>

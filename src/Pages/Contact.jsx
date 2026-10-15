@@ -12,7 +12,6 @@ import {
   Sparkles
 } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import TiltCard from "../Components/TiltCard";
 import MagneticButton from "../Components/MagneticButton";
 
 const fadeUp = {
@@ -177,10 +176,9 @@ function Contact() {
           </motion.div>
         </div>
 
-        {/* RIGHT COLUMN (3 Cols) — 3D Tilt Contact Form */}
+        {/* RIGHT COLUMN (3 Cols) — Stable Contact Form */}
         <div className="lg:col-span-3">
-          <TiltCard maxTilt={8} scale={1.01}>
-            <motion.form
+          <motion.form
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
@@ -306,7 +304,6 @@ function Contact() {
                 </motion.button>
               </MagneticButton>
             </motion.form>
-          </TiltCard>
         </div>
       </div>
     </section>

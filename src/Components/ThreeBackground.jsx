@@ -13,8 +13,8 @@ export default function ThreeBackground() {
 
     // 1. Scene & Camera
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 1000);
-    camera.position.z = 9;
+    const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+    camera.position.z = 10;
 
     // 2. Renderer
     const renderer = new THREE.WebGLRenderer({
@@ -27,123 +27,166 @@ export default function ThreeBackground() {
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
-    // 3. Parent 3D Group for mouse & scroll parallax
+    // 3. Parent World Group
     const worldGroup = new THREE.Group();
     scene.add(worldGroup);
 
-    // 4. Floating 3D Geometric Mesh 1 (Outer Icosahedron Wireframe)
-    const icosaGeo = new THREE.IcosahedronGeometry(2.6, 1);
-    const icosaMat = new THREE.MeshBasicMaterial({
-      color: 0x06b6d4, // Cyan
-      wireframe: true,
-      transparent: true,
-      opacity: 0.22,
-    });
-    const icosaMesh = new THREE.Mesh(icosaGeo, icosaMat);
-    icosaMesh.position.set(4.5, 0.5, -2);
-    worldGroup.add(icosaMesh);
+    // 4. Futuristic Multi-Axis Holographic Gyroscope (Top-Right Parallax)
+    const gyroGroup = new THREE.Group();
+    gyroGroup.position.set(4.2, 1.2, -2.5);
+    worldGroup.add(gyroGroup);
 
-    // 5. Floating 3D Geometric Mesh 2 (Inner Octahedron)
-    const octaGeo = new THREE.OctahedronGeometry(1.4, 0);
-    const octaMat = new THREE.MeshBasicMaterial({
-      color: 0x818cf8, // Indigo
-      wireframe: true,
+    // Ring 1 - Outer Cyan Ring
+    const ring1Geo = new THREE.TorusGeometry(2.6, 0.02, 16, 90);
+    const ring1Mat = new THREE.MeshBasicMaterial({
+      color: 0x06b6d4, // Cyan
       transparent: true,
       opacity: 0.35,
     });
-    const octaMesh = new THREE.Mesh(octaGeo, octaMat);
-    octaMesh.position.set(4.5, 0.5, -2);
-    worldGroup.add(octaMesh);
+    const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
+    gyroGroup.add(ring1);
 
-    // 6. Floating 3D Geometric Mesh 3 (Left background Torus Knot)
-    const torusGeo = new THREE.TorusKnotGeometry(1.6, 0.2, 80, 16);
-    const torusMat = new THREE.MeshBasicMaterial({
-      color: 0x6366f1, // Purple-indigo
+    // Ring 2 - Middle Sky Blue Ring (tilted)
+    const ring2Geo = new THREE.TorusGeometry(2.0, 0.02, 16, 80);
+    const ring2Mat = new THREE.MeshBasicMaterial({
+      color: 0x38bdf8, // Sky Blue
+      transparent: true,
+      opacity: 0.45,
+    });
+    const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+    ring2.rotation.x = Math.PI / 3;
+    gyroGroup.add(ring2);
+
+    // Ring 3 - Inner Indigo Ring
+    const ring3Geo = new THREE.TorusGeometry(1.4, 0.02, 16, 70);
+    const ring3Mat = new THREE.MeshBasicMaterial({
+      color: 0x818cf8, // Indigo
+      transparent: true,
+      opacity: 0.5,
+    });
+    const ring3 = new THREE.Mesh(ring3Geo, ring3Mat);
+    ring3.rotation.y = Math.PI / 4;
+    gyroGroup.add(ring3);
+
+    // Core Crystal (Wireframe Icosahedron)
+    const coreGeo = new THREE.IcosahedronGeometry(0.85, 0);
+    const coreMat = new THREE.MeshBasicMaterial({
+      color: 0x22d3ee,
       wireframe: true,
       transparent: true,
-      opacity: 0.16,
+      opacity: 0.6,
     });
-    const torusMesh = new THREE.Mesh(torusGeo, torusMat);
-    torusMesh.position.set(-4.8, -1.8, -3);
-    worldGroup.add(torusMesh);
+    const core = new THREE.Mesh(coreGeo, coreMat);
+    gyroGroup.add(core);
 
-    // 7. Floating 3D Geometric Mesh 4 (Small Tetrahedrons floating in depth)
-    const tetraGroup = new THREE.Group();
-    const tetraGeo = new THREE.TetrahedronGeometry(0.5, 0);
-    const tetraMat = new THREE.MeshBasicMaterial({
-      color: 0x38bdf8,
+    // Left Secondary Holographic Element (Abstract Torus Knot)
+    const knotGeo = new THREE.TorusKnotGeometry(1.5, 0.15, 90, 16, 2, 3);
+    const knotMat = new THREE.MeshBasicMaterial({
+      color: 0x4f46e5,
       wireframe: true,
       transparent: true,
-      opacity: 0.3,
+      opacity: 0.18,
     });
+    const knotMesh = new THREE.Mesh(knotGeo, knotMat);
+    knotMesh.position.set(-5.0, -2.0, -3.5);
+    worldGroup.add(knotMesh);
 
-    const tetraList = [];
-    for (let i = 0; i < 6; i++) {
-      const mesh = new THREE.Mesh(tetraGeo, tetraMat);
-      mesh.position.set(
+    // 5. Constellation Neural Web (Interconnected Cyber Nodes)
+    const nodeCount = 85;
+    const maxDistance = 2.4;
+    const nodePositions = [];
+    const nodeVelocities = [];
+
+    for (let i = 0; i < nodeCount; i++) {
+      const pos = new THREE.Vector3(
+        (Math.random() - 0.5) * 18,
         (Math.random() - 0.5) * 14,
-        (Math.random() - 0.5) * 10,
-        (Math.random() - 0.5) * 6 - 2
+        (Math.random() - 0.5) * 8 - 1
       );
-      mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
-      tetraGroup.add(mesh);
-      tetraList.push({
-        mesh,
-        rotSpeedX: (Math.random() - 0.5) * 0.015,
-        rotSpeedY: (Math.random() - 0.5) * 0.015,
-        floatSpeed: 0.8 + Math.random() * 0.8,
-        floatOffset: Math.random() * Math.PI * 2,
-      });
-    }
-    worldGroup.add(tetraGroup);
-
-    // 8. 3D Particle Starfield & Cyber Dust (450 particles)
-    const particleCount = 450;
-    const particleGeo = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-    const initialPositions = new Float32Array(particleCount * 3);
-
-    const cyanColor = new THREE.Color(0x22d3ee);
-    const violetColor = new THREE.Color(0xa855f7);
-    const blueColor = new THREE.Color(0x3b82f6);
-
-    for (let i = 0; i < particleCount; i++) {
-      const x = (Math.random() - 0.5) * 22;
-      const y = (Math.random() - 0.5) * 18;
-      const z = (Math.random() - 0.5) * 14 - 1;
-
-      positions[i * 3] = x;
-      positions[i * 3 + 1] = y;
-      positions[i * 3 + 2] = z;
-
-      initialPositions[i * 3] = x;
-      initialPositions[i * 3 + 1] = y;
-      initialPositions[i * 3 + 2] = z;
-
-      // Color variation
-      const rand = Math.random();
-      const color = rand > 0.6 ? cyanColor : rand > 0.3 ? violetColor : blueColor;
-      colors[i * 3] = color.r;
-      colors[i * 3 + 1] = color.g;
-      colors[i * 3 + 2] = color.b;
+      nodePositions.push(pos);
+      nodeVelocities.push(
+        new THREE.Vector3(
+          (Math.random() - 0.5) * 0.006,
+          (Math.random() - 0.5) * 0.006,
+          (Math.random() - 0.5) * 0.004
+        )
+      );
     }
 
-    particleGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    particleGeo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+    // Node Points
+    const pointsGeo = new THREE.BufferGeometry();
+    const pointPositions = new Float32Array(nodeCount * 3);
+    const pointColors = new Float32Array(nodeCount * 3);
 
-    const particleMat = new THREE.PointsMaterial({
-      size: 0.06,
+    const cyanCol = new THREE.Color(0x22d3ee);
+    const blueCol = new THREE.Color(0x38bdf8);
+    const purpleCol = new THREE.Color(0x818cf8);
+
+    for (let i = 0; i < nodeCount; i++) {
+      pointPositions[i * 3] = nodePositions[i].x;
+      pointPositions[i * 3 + 1] = nodePositions[i].y;
+      pointPositions[i * 3 + 2] = nodePositions[i].z;
+
+      const col = i % 3 === 0 ? cyanCol : i % 3 === 1 ? blueCol : purpleCol;
+      pointColors[i * 3] = col.r;
+      pointColors[i * 3 + 1] = col.g;
+      pointColors[i * 3 + 2] = col.b;
+    }
+
+    pointsGeo.setAttribute("position", new THREE.BufferAttribute(pointPositions, 3));
+    pointsGeo.setAttribute("color", new THREE.BufferAttribute(pointColors, 3));
+
+    const pointsMat = new THREE.PointsMaterial({
+      size: 0.1,
       vertexColors: true,
       transparent: true,
-      opacity: 0.75,
+      opacity: 0.8,
       blending: THREE.AdditiveBlending,
     });
+    const pointsMesh = new THREE.Points(pointsGeo, pointsMat);
+    worldGroup.add(pointsMesh);
 
-    const particles = new THREE.Points(particleGeo, particleMat);
-    worldGroup.add(particles);
+    // Neural Connection Lines
+    const maxLines = (nodeCount * (nodeCount - 1)) / 2;
+    const linePositions = new Float32Array(maxLines * 6);
+    const lineColors = new Float32Array(maxLines * 6);
 
-    // 9. Mouse and Scroll Tracking
+    const linesGeo = new THREE.BufferGeometry();
+    linesGeo.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
+    linesGeo.setAttribute("color", new THREE.BufferAttribute(lineColors, 3));
+
+    const linesMat = new THREE.LineBasicMaterial({
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.35,
+      blending: THREE.AdditiveBlending,
+    });
+    const linesMesh = new THREE.LineSegments(linesGeo, linesMat);
+    worldGroup.add(linesMesh);
+
+    // 6. Ambient Dust Starfield (Deep Background)
+    const starCount = 200;
+    const starGeo = new THREE.BufferGeometry();
+    const starPositions = new Float32Array(starCount * 3);
+
+    for (let i = 0; i < starCount; i++) {
+      starPositions[i * 3] = (Math.random() - 0.5) * 26;
+      starPositions[i * 3 + 1] = (Math.random() - 0.5) * 20;
+      starPositions[i * 3 + 2] = (Math.random() - 0.5) * 10 - 4;
+    }
+
+    starGeo.setAttribute("position", new THREE.BufferAttribute(starPositions, 3));
+    const starMat = new THREE.PointsMaterial({
+      size: 0.04,
+      color: 0x38bdf8,
+      transparent: true,
+      opacity: 0.5,
+      blending: THREE.AdditiveBlending,
+    });
+    const stars = new THREE.Points(starGeo, starMat);
+    worldGroup.add(stars);
+
+    // 7. Mouse & Scroll Tracking
     let mouseX = 0;
     let mouseY = 0;
     let targetX = 0;
@@ -151,99 +194,128 @@ export default function ThreeBackground() {
     let scrollY = 0;
     let targetScrollY = 0;
 
-    const handleMouseMove = (e) => {
-      mouseX = (e.clientX - window.innerWidth / 2) * 0.0006;
-      mouseY = (e.clientY - window.innerHeight / 2) * 0.0006;
+    const onMouseMove = (e) => {
+      mouseX = (e.clientX - window.innerWidth / 2) * 0.0004;
+      mouseY = (e.clientY - window.innerHeight / 2) * 0.0004;
     };
 
-    const handleScroll = () => {
-      scrollY = window.scrollY * 0.0015;
+    const onScroll = () => {
+      scrollY = window.scrollY * 0.0012;
     };
 
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    const onResize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    };
 
-    // 10. Animation Loop
-    let animationFrameId;
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+
+    // 8. Animation Loop
+    let animId;
     const clock = new THREE.Clock();
 
     const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
+      animId = requestAnimationFrame(animate);
       const elapsed = clock.getElapsedTime();
 
-      // Smooth mouse interpolation
-      targetX += (mouseX - targetX) * 0.05;
-      targetY += (mouseY - targetY) * 0.05;
-      targetScrollY += (scrollY - targetScrollY) * 0.05;
+      // Smooth Parallax
+      targetX += (mouseX - targetX) * 0.04;
+      targetY += (mouseY - targetY) * 0.04;
+      targetScrollY += (scrollY - targetScrollY) * 0.04;
 
-      worldGroup.rotation.y = targetX * 1.5;
-      worldGroup.rotation.x = targetY * 1.2;
-      worldGroup.position.y = -targetScrollY * 1.8;
+      worldGroup.rotation.y = targetX * 1.2;
+      worldGroup.rotation.x = targetY * 0.9;
+      worldGroup.position.y = -targetScrollY * 1.5;
 
-      // Rotate primary geometries
-      icosaMesh.rotation.x = elapsed * 0.15;
-      icosaMesh.rotation.y = elapsed * 0.2;
+      // Rotate Holographic Gyroscope
+      ring1.rotation.z = elapsed * 0.18;
+      ring1.rotation.x = elapsed * 0.12;
 
-      octaMesh.rotation.x = -elapsed * 0.25;
-      octaMesh.rotation.z = elapsed * 0.3;
+      ring2.rotation.y = -elapsed * 0.22;
+      ring2.rotation.z = elapsed * 0.15;
 
-      torusMesh.rotation.x = elapsed * 0.12;
-      torusMesh.rotation.y = elapsed * 0.16;
+      ring3.rotation.x = elapsed * 0.25;
+      ring3.rotation.y = elapsed * 0.2;
 
-      // Animate small tetrahedrons
-      tetraList.forEach(({ mesh, rotSpeedX, rotSpeedY, floatSpeed, floatOffset }) => {
-        mesh.rotation.x += rotSpeedX;
-        mesh.rotation.y += rotSpeedY;
-        mesh.position.y += Math.sin(elapsed * floatSpeed + floatOffset) * 0.004;
-      });
+      core.rotation.x = -elapsed * 0.3;
+      core.rotation.y = -elapsed * 0.35;
 
-      // Wave motion on particles
-      const posAttr = particleGeo.attributes.position;
-      for (let i = 0; i < particleCount; i++) {
-        const i3 = i * 3;
-        posAttr.array[i3 + 1] = initialPositions[i3 + 1] + Math.sin(elapsed * 0.8 + initialPositions[i3] * 0.5) * 0.25;
+      // Animate secondary knot
+      knotMesh.rotation.x = elapsed * 0.1;
+      knotMesh.rotation.y = elapsed * 0.14;
+
+      // Animate Constellation Nodes
+      const positionsArr = pointsGeo.attributes.position.array;
+      let lineIdx = 0;
+
+      for (let i = 0; i < nodeCount; i++) {
+        const pos = nodePositions[i];
+        const vel = nodeVelocities[i];
+
+        pos.add(vel);
+
+        // Boundary bounce
+        if (Math.abs(pos.x) > 9) vel.x *= -1;
+        if (Math.abs(pos.y) > 7) vel.y *= -1;
+        if (Math.abs(pos.z) > 4) vel.z *= -1;
+
+        positionsArr[i * 3] = pos.x;
+        positionsArr[i * 3 + 1] = pos.y;
+        positionsArr[i * 3 + 2] = pos.z;
+
+        // Check distance with other nodes to draw lines
+        for (let j = i + 1; j < nodeCount; j++) {
+          const other = nodePositions[j];
+          const dist = pos.distanceTo(other);
+
+          if (dist < maxDistance) {
+            const alpha = (1.0 - dist / maxDistance) * 0.3;
+
+            linePositions[lineIdx * 6] = pos.x;
+            linePositions[lineIdx * 6 + 1] = pos.y;
+            linePositions[lineIdx * 6 + 2] = pos.z;
+
+            linePositions[lineIdx * 6 + 3] = other.x;
+            linePositions[lineIdx * 6 + 4] = other.y;
+            linePositions[lineIdx * 6 + 5] = other.z;
+
+            // Gradient line color
+            lineColors[lineIdx * 6] = cyanCol.r * alpha;
+            lineColors[lineIdx * 6 + 1] = cyanCol.g * alpha;
+            lineColors[lineIdx * 6 + 2] = cyanCol.b * alpha;
+
+            lineColors[lineIdx * 6 + 3] = blueCol.r * alpha;
+            lineColors[lineIdx * 6 + 4] = blueCol.g * alpha;
+            lineColors[lineIdx * 6 + 5] = blueCol.b * alpha;
+
+            lineIdx++;
+          }
+        }
       }
-      posAttr.needsUpdate = true;
 
-      particles.rotation.y = elapsed * 0.02;
+      pointsGeo.attributes.position.needsUpdate = true;
+      linesGeo.setDrawRange(0, lineIdx * 2);
+      linesGeo.attributes.position.needsUpdate = true;
+      linesGeo.attributes.color.needsUpdate = true;
 
       renderer.render(scene, camera);
     };
 
     animate();
 
-    // 11. Responsive Resize
-    const handleResize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-      renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    };
-
-    window.addEventListener("resize", handleResize);
-
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
-
-      if (container && renderer.domElement) {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
-
-      icosaGeo.dispose();
-      icosaMat.dispose();
-      octaGeo.dispose();
-      octaMat.dispose();
-      torusGeo.dispose();
-      torusMat.dispose();
-      tetraGeo.dispose();
-      tetraMat.dispose();
-      particleGeo.dispose();
-      particleMat.dispose();
       renderer.dispose();
     };
   }, []);
@@ -251,8 +323,7 @@ export default function ThreeBackground() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
-      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-85"
     />
   );
 }
